@@ -74,4 +74,10 @@ public class TvSeries {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return name + ", ilość sezonów: " + seasonsNumber + ", ilość odcinków" + seasonsNumber +
+                ", producent: " + producer + ", gatunek: " + genre + ", opis:" + description + ". ocena:" + rating;
+    }
 }

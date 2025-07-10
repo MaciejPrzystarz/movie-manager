@@ -3,12 +3,12 @@ package com.usernameMaciej.model;
 public class Actor {
     private String firstName;
     private String lastName;
-    private String countryOrigin;
+    private String countryBorn;
 
-    public Actor(String firstName, String lastName, String countryOrigin) {
+    public Actor(String firstName, String lastName, String countryBorn) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.countryOrigin = countryOrigin;
+        this.countryBorn = countryBorn;
     }
 
     public String getFirstName() {
@@ -27,11 +27,16 @@ public class Actor {
         this.lastName = lastName;
     }
 
-    public String getCountryOrigin() {
-        return countryOrigin;
+    public String getCountryBorn() {
+        return countryBorn;
     }
 
-    public void setCountryOrigin(String countryOrigin) {
-        this.countryOrigin = countryOrigin;
+    public void setCountryBorn(String countryBorn) {
+        this.countryBorn = countryBorn;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + ", kraj urodzenia:" + countryBorn;
     }
 }
