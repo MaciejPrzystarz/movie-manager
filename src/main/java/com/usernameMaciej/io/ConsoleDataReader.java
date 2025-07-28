@@ -7,7 +7,7 @@ import com.usernameMaciej.model.TvSeries;
 import java.util.Scanner;
 
 public class ConsoleDataReader {
-    private Scanner scanner = new Scanner(System.in);
+
 
     public Actor createActor() {
         System.out.println("---Dodawanie aktora---");
