@@ -65,9 +65,5 @@ public class Movie {
         this.rating = rating;
     }
 
-    @Override
-    public String toString() {
-        return name + ", reżyser: " + director + ", rok produkcji:" + productionYear +
-                ", gatunek: " + genre + ", " + description + ". ocena:" + rating;
-    }
+ 
 }

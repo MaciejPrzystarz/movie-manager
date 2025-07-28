@@ -39,4 +39,13 @@ public class Actor {
     public String toString() {
         return firstName + " " + lastName + ", kraj urodzenia:" + countryBorn;
     }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", countryOrigin='" + countryOrigin + '\'' +
+                '}';
+    }
 }
