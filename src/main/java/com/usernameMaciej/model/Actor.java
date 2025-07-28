@@ -34,4 +34,13 @@ public class Actor {
     public void setCountryOrigin(String countryOrigin) {
         this.countryOrigin = countryOrigin;
     }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", countryOrigin='" + countryOrigin + '\'' +
+                '}';
+    }
 }

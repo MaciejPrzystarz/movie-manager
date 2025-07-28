@@ -74,4 +74,17 @@ public class TvSeries {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "TvSeries{" +
+                "name='" + name + '\'' +
+                ", seasonsNumber=" + seasonsNumber +
+                ", episodesNumber=" + episodesNumber +
+                ", producer='" + producer + '\'' +
+                ", genre='" + genre + '\'' +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 }
