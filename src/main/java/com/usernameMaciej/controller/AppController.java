@@ -61,10 +61,9 @@ public class AppController {
     }
 
     private void displayOptions() {
-        System.out.println("0 - Dodanie aktora");
-        System.out.println("1 - Dodanie filmu");
-        System.out.println("2 - Dodanie serialu");
-        System.out.println("3 - Wyświetl wszystko");
-        System.out.println("4 - Koniec");
+        Option[] values = Option.values();
+        for (Option value : values) {
+            System.out.println(value.optionToChoose());
+        }
     }
 }
