@@ -1,11 +1,12 @@
 package com.usernameMaciej.app;
 
-import com.usernameMaciej.controller.AppController;
+import com.usernameMaciej.controller.ApplicationController;
 
 public class Main {
     public static void main(String[] args) {
-        AppController appController = new AppController();
-        appController.mainLoop();
+
+        ApplicationController applicationController = new ApplicationController();
+        applicationController.mainLoop();
 
     }
 }

@@ -1,46 +1,31 @@
 package com.usernameMaciej.model;
 
-public class TvSeries {
-    private String name;
-    private int seasonsNumber;
-    private int episodesNumber;
+public class TvSeries extends Item {
+    private int seasons;
+    private int episodes;
     private String producer;
-    private String genre;
-    private String description;
-    private double rating;
 
-    public TvSeries(String name, int seasonsNumber, int episodesNumber, String producer, String genre, String description, double rating) {
-        this.name = name;
-        this.seasonsNumber = seasonsNumber;
-        this.episodesNumber = episodesNumber;
+    public TvSeries(String title, int seasons, int episodes, String producer, String genre, String description, int rating) {
+        super(title, genre, description, rating);
+        this.seasons = seasons;
+        this.episodes = episodes;
         this.producer = producer;
-        this.genre = genre;
-        this.description = description;
-        this.rating = rating;
     }
 
-    public String getName() {
-        return name;
+    public int getSeasons() {
+        return seasons;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSeasons(int seasons) {
+        this.seasons = seasons;
     }
 
-    public int getSeasonsNumber() {
-        return seasonsNumber;
+    public int getEpisodes() {
+        return episodes;
     }
 
-    public void setSeasonsNumber(int seasonsNumber) {
-        this.seasonsNumber = seasonsNumber;
-    }
-
-    public int getEpisodesNumber() {
-        return episodesNumber;
-    }
-
-    public void setEpisodesNumber(int episodesNumber) {
-        this.episodesNumber = episodesNumber;
+    public void setEpisodes(int episodes) {
+        this.episodes = episodes;
     }
 
     public String getProducer() {
@@ -51,40 +36,13 @@ public class TvSeries {
         this.producer = producer;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    @Override
-    public String toString() {
-        return "TvSeries{" +
-                "name='" + name + '\'' +
-                ", seasonsNumber=" + seasonsNumber +
-                ", episodesNumber=" + episodesNumber +
-                ", producer='" + producer + '\'' +
-                ", genre='" + genre + '\'' +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                '}';
+    public void showInfo() {
+        System.out.println(getTitle() + ", liczba sezonów: " +
+                seasons + ", liczba odcinków: " +
+                episodes + ", producent: " +
+                producer + ", gatunek: " +
+                getGenre() + ", opis: " +
+                getDescription() + ", ocena: " +
+                getRating());
     }
 }

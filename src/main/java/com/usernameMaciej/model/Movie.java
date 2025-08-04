@@ -1,28 +1,21 @@
 package com.usernameMaciej.model;
 
-public class Movie {
-    private String name;
+public class Movie extends Item {
+    private int year;
     private String director;
-    private int productionYear;
-    private String genre;
-    private String description;
-    private double rating;
 
-    public Movie(String name, String director, int productionYear, String genre, String description, double rating) {
-        this.name = name;
+    public Movie(String title, String director, int year,  String genre, String description, int rating) {
+        super(title, genre, description, rating);
+        this.year = year;
         this.director = director;
-        this.productionYear = productionYear;
-        this.genre = genre;
-        this.description = description;
-        this.rating = rating;
     }
 
-    public String getName() {
-        return name;
+    public int getYear() {
+        return year;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getDirector() {
@@ -33,47 +26,12 @@ public class Movie {
         this.director = director;
     }
 
-    public int getProductionYear() {
-        return productionYear;
-    }
-
-    public void setProductionYear(int productionYear) {
-        this.productionYear = productionYear;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "name='" + name + '\'' +
-                ", director='" + director + '\'' +
-                ", productionYear=" + productionYear +
-                ", genre='" + genre + '\'' +
-                ", description='" + description + '\'' +
-                ", rating=" + rating +
-                '}';
+    public void showInfo() {
+        System.out.println(getTitle() + ", rok: " +
+                year + ", reżyser: " +
+                director + ", gatunek: " +
+                getGenre() + ", opis: " +
+                getDescription() + ", ocena: " +
+                getRating());
     }
 }
