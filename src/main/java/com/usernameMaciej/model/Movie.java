@@ -1,5 +1,7 @@
 package com.usernameMaciej.model;
 
+import java.util.Objects;
+
 public class Movie extends Item {
     private String director;
     private int productionYear;
@@ -25,7 +27,6 @@ public class Movie extends Item {
     public void setProductionYear(int productionYear) {
         this.productionYear = productionYear;
     }
-
 
     @Override
     public String toString() {
