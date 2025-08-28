@@ -40,7 +40,7 @@ public class AppDatabase {
 
     public void addMovie(Movie movie) {
         for (Movie movieFromArray : getMovies()) {
-            if (movieFromArray.equals(movie)) {
+            if (movie.equals(movieFromArray)) {
                 throw new DuplicateException("Movie cannot be duplicated.");
             }
         }
