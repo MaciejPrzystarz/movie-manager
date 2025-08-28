@@ -1,5 +1,7 @@
 package com.usernameMaciej.model;
 
+import com.usernameMaciej.exceptions.GenreNotExistsException;
+
 public enum Genre {
     SCI_FI("Science Fiction"),
     ACTION("Akcja"),
@@ -13,10 +15,6 @@ public enum Genre {
         this.description = pl;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public static String convertEnumToString(String genre) {
         Genre[] values = Genre.values();
         for (Genre value : values) {
@@ -24,7 +22,7 @@ public enum Genre {
                 return value.description;
             }
         }
-        throw new IllegalArgumentException();
+        throw new GenreNotExistsException("The provided genre does not exist.");
     }
 
     public static void printAllGenres() {

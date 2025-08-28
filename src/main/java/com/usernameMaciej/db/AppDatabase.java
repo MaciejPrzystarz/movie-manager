@@ -1,5 +1,6 @@
 package com.usernameMaciej.db;
 
+import com.usernameMaciej.exceptions.DuplicateException;
 import com.usernameMaciej.io.ConsoleDataReader;
 import com.usernameMaciej.model.Actor;
 import com.usernameMaciej.model.Movie;
@@ -26,21 +27,36 @@ public class AppDatabase {
     }
 
     public void addActor(Actor actor) {
-        if (actors != null && actorsNumber < actors.length) {
+        for (Actor actorsFromArray : actors) {
+            if (actor.equals(actorsFromArray)) {
+                throw new DuplicateException("Actor cannot be duplicated.");
+            }
+        }
+        if (actor != null && actorsNumber < actors.length) {
             actors[actorsNumber] = actor;
             actorsNumber++;
         }
     }
 
     public void addMovie(Movie movie) {
-        if (movies != null && moviesNumber < movies.length) {
+        for (Movie movieFromArray : getMovies()) {
+            if (movieFromArray.equals(movie)) {
+                throw new DuplicateException("Movie cannot be duplicated.");
+            }
+        }
+        if (movie != null && moviesNumber < movies.length) {
             movies[moviesNumber] = movie;
             moviesNumber++;
         }
     }
 
     public void addTvSerie(TvSeries tvSerie) {
-        if (tvSeries != null && tvSeriesNumber < tvSeries.length) {
+        for (TvSeries seriesFromArray : getTvSeries()) {
+            if (tvSerie.equals(seriesFromArray)) {
+                throw new DuplicateException("TV Series cannot be duplicated.");
+            }
+        }
+        if (tvSerie != null && tvSeriesNumber < tvSeries.length) {
             tvSeries[tvSeriesNumber] = tvSerie;
             tvSeriesNumber++;
         }
