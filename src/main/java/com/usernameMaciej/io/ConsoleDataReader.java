@@ -1,76 +1,122 @@
 package com.usernameMaciej.io;
 
+import com.usernameMaciej.exceptions.IncorrectDataException;
 import com.usernameMaciej.model.Actor;
 import com.usernameMaciej.model.Genre;
 import com.usernameMaciej.model.Movie;
 import com.usernameMaciej.model.TvSeries;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleDataReader {
     private Scanner scanner = new Scanner(System.in);
 
-    public Actor createActor() {
-        System.out.println("---Dodawanie aktora---");
-        System.out.println("Podaj imię:");
-        String firstName = scanner.nextLine();
-        System.out.println("Podaj nazwisko:");
-        String lastName = scanner.nextLine();
-        System.out.println("Podaj kraj urodzenia:");
-        String countryBorn = scanner.nextLine();
-        return new Actor(firstName, lastName, countryBorn);
+    public Movie createMovie() {
+        String convertedGenre = "";
+        printLine("Creating new movie...\nEnter movie name:");
+        String name = scanner.nextLine();
+        printLine("Enter name of director:");
+        String director = scanner.nextLine();
+        printLine("Enter the year of production:");
+        int yearOfProduction = readIntFromScanner();
+        printLine("Enter the genre:");
+        convertedGenre = getGenre(convertedGenre);
+        printLine("Enter a description:");
+        String description = scanner.nextLine();
+        printLine("Enter rating (0 - 10):");
+        int rating = readRatingFromScanner();
+        return new Movie(name, convertedGenre, description, rating, director, yearOfProduction);
     }
 
-    public Movie createMovie() {
-        System.out.println("---Dodawanie filmu---");
-        System.out.println("Podaj nazwę:");
-        String name = scanner.nextLine();
-        System.out.println("Podaj gatunek:");
-        Genre.printAllGenres();
-        String genre = scanner.nextLine();
-        String convertedGenre = Genre.convertEnumToString(genre);
-        System.out.println("Podaj krótki opis:");
-        String description = scanner.nextLine();
-        System.out.println("Podaj ocenę:");
-        double rating = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Podaj reżysera:");
-        String director = scanner.nextLine();
-        System.out.println("Podaj rok produkcji:");
-        int productionYear = scanner.nextInt();
-        scanner.nextLine();
-        if (productionYear < 1800 || productionYear > 2026 || rating < 0 || rating > 10) {
-            System.out.println("Obiektu nie udało się utworzyć, została przekazana błędna wartość");
-            return null;
-        }
-        return new Movie(name, convertedGenre, description, rating, director, productionYear);
+    public Actor createActor() {
+        printLine("Creating new actor...\nEnter actor first name:");
+        String firstName = scanner.nextLine();
+        printLine("Enter actor last name:");
+        String lastName = scanner.nextLine();
+        printLine("Enter the actor's country of origin:");
+        String countryOfOrigin = scanner.nextLine();
+        return new Actor(firstName, lastName, countryOfOrigin);
     }
 
     public TvSeries createTvSeries() {
-        System.out.println("---Dodawanie filmu---");
-        System.out.println("Podaj nazwę:");
+        printLine("Creating new series...\nEnter TV series name:");
         String name = scanner.nextLine();
+        printLine("Enter the number of seasons:");
+        int numberOfSeasons = readIntFromScanner();
+        printLine("Enter the number of episodes:");
+        int numberOfEpisodes = readIntFromScanner();
+        printLine("Enter name of director:");
+        String producer = scanner.nextLine();
+        printLine("Enter genre:");
         Genre.printAllGenres();
         String genre = scanner.nextLine();
         String convertedGenre = Genre.convertEnumToString(genre);
-        System.out.println("Podaj krótki opis:");
+        printLine("Enter description:");
         String description = scanner.nextLine();
-        System.out.println("Podaj ocenę:");
-        double rating = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Podaj liczbę sezonów");
-        int seasonsNumber = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Podaj liczbę odcinków");
-        int episodesNumber = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Podaj producenta:");
-        String producer = scanner.nextLine();
-        System.out.println("Podaj gatunek:");
-        if (seasonsNumber <= 0 || episodesNumber <= 0 || rating < 0 || rating > 10) {
-            System.out.println("Obiektu nie udało się utworzyć, została przekazana błędna wartość");
-            return null;
+        printLine("Enter rating (0 - 10):");
+        int rating = readRatingFromScanner();
+        if (convertedGenre == null) {
+            throw new IncorrectDataException("The provided data is incorrect. Failed to create the TV series.");
+        } else {
+            return new TvSeries(name, convertedGenre, description, rating, numberOfSeasons, numberOfEpisodes, producer);
         }
-        return new TvSeries(name, convertedGenre, description, rating, seasonsNumber, episodesNumber, producer);
+    }
+
+    public int readIntFromScanner() {
+        int number = -1;
+        while (number < 0) {
+            try {
+                number = scanner.nextInt();
+                if (number < 0) {
+                    System.err.println("The number must be positive. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("The data is in an invalid format. Please try again.");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        return number;
+    }
+
+
+    private String getGenre(String convertedGenre) {
+        String genre;
+        do {
+            Genre.printAllGenres();
+            genre = scanner.nextLine();
+            try {
+                convertedGenre = Genre.convertEnumToString(genre);
+            } catch (IncorrectDataException e) {
+                System.err.println("The provided genre is incorrect. Please try again.");
+            }
+        } while (!genre.equalsIgnoreCase(convertedGenre));
+        return convertedGenre;
+    }
+
+    private int readRatingFromScanner() {
+        int number = -1;
+        while (isInTheNumericalRange(number)) {
+            try {
+                number = scanner.nextInt();
+                if (isInTheNumericalRange(number)) {
+                    System.err.println("The number cannot be lower than 0 or exceed 10. Please try again.");
+                }
+            } catch (InputMismatchException e) {
+                System.err.println("The data is in an invalid format. Please try again.");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        return number;
+    }
+
+    private static boolean isInTheNumericalRange(int number) {
+        return number < 0 || number > 10;
+    }
+
+    private void printLine(String text) {
+        System.out.println(text);
     }
 }
